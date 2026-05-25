@@ -10,6 +10,12 @@
 <meta property="og:title" content="PARALLEL - Sealed Pok&#233;mon TCG, Below Market">
 <meta property="og:description" content="Authentic, factory-sealed Pok&#233;mon TCG product below market. Proof of purchase on every order.">
 <meta property="og:url" content="https://paralleltrading.net/">
+<meta property="og:image" content="https://paralleltrading.net/images/hero-pikachu.png">
+<meta property="og:site_name" content="PARALLEL">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PARALLEL - Sealed Pok&#233;mon TCG, Below Market">
+<meta name="twitter:description" content="Authentic, factory-sealed Pok&#233;mon TCG product below market. Proof of purchase on every order.">
+<meta name="twitter:image" content="https://paralleltrading.net/images/hero-pikachu.png">
 <title>PARALLEL - Sealed Pok&#233;mon TCG, Below Market</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,6 +84,27 @@
 .ebay-reopen .ec-pulse{width:5px;height:5px;border-radius:50%;background:var(--pk-red);animation:ec-pulse 1.8s infinite}
 @media(max-width:780px){.ebay-card,.ebay-reopen{display:none!important}}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "PARALLEL",
+  "alternateName": "Parallel Trading",
+  "url": "https://paralleltrading.net/",
+  "logo": "https://paralleltrading.net/images/hero-pokeball.png",
+  "description": "Authentic, factory-sealed Pokémon TCG product below market. Proof of purchase on every order.",
+  "email": "hello@paralleltrading.net",
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "PARALLEL",
+  "url": "https://paralleltrading.net/"
+}
+</script>
 </head>
 <body>
 <div class="frame-top"></div><div class="frame-right"></div><div class="frame-bottom"></div><div class="frame-left"></div>
@@ -311,7 +338,7 @@
     [media, title].forEach(function(el){
       if (!el) return;
       el.style.cursor = 'pointer';
-      el.addEventListener('click', function(){ location.href = '/product.html?id=' + pid; });
+      el.addEventListener('click', function(){ location.href = '/products/' + pid + '.html'; });
     });
   });
   document.querySelectorAll('button.btn[data-pid]').forEach(function(btn){
