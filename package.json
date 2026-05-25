@@ -1,0 +1,10 @@
+{
+  "name": "parallel-trading",
+  "version": "1.0.0",
+  "private": true,
+  "description": "PARALLEL - sealed Pokemon TCG, below market. Static site + Netlify Functions.",
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "stripe": "^16.9.0"
+  }
+}
