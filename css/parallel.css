@@ -133,3 +133,33 @@ img{max-width:100%;display:block}
   .form-wrap{padding:48px 20px}
   .field-row{grid-template-columns:1fr}
 }
+
+
+/* ===== PARALLEL frame + brand accent lines ===== */
+html{background:#000}
+body{position:relative}
+/* Fixed full-viewport frame in PARALLEL red */
+.frame-top,.frame-right,.frame-bottom,.frame-left{
+  position:fixed;background:var(--pk-red);z-index:1000;pointer-events:none;
+}
+.frame-top{top:0;left:0;right:0;height:2px}
+.frame-bottom{bottom:0;left:0;right:0;height:2px}
+.frame-left{top:0;bottom:0;left:0;width:2px}
+.frame-right{top:0;bottom:0;right:0;width:2px}
+
+/* Inset all content so it sits inside the frame */
+.nav,.foot,.hero,.hero-bold,.section,.standard,.cta-band,.cta-band-bold,.form-wrap{margin-left:14px;margin-right:14px}
+body{padding-top:14px;padding-bottom:14px}
+
+/* Brand wordmark with parallel red lines above and below */
+.brand{display:inline-flex;flex-direction:column;align-items:flex-start;gap:5px;line-height:1;padding:0}
+.brand-rule{width:100%;height:1.5px;background:var(--pk-red);display:block}
+.brand .label{font-family:var(--sans);font-weight:700;font-size:18px;letter-spacing:0.32em;color:var(--text);display:block}
+.brand .label .dot{color:var(--pk-red)}
+
+@media(max-width:680px){
+  .nav,.foot,.hero,.hero-bold,.section,.standard,.cta-band,.cta-band-bold,.form-wrap{margin-left:10px;margin-right:10px}
+  body{padding-top:10px;padding-bottom:10px}
+  .frame-top,.frame-bottom{height:2px}
+  .frame-left,.frame-right{width:2px}
+}
