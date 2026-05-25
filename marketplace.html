@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marketplace - PARALLEL</title>
+<meta name="description" content="Verified sealed product from approved sellers. Authenticated by PARALLEL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/parallel.css">
+</head><body>
+<nav class="nav"><div class="nav-inner">
+    <a href="/" class="brand">PARALLEL<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="/">Drops</a>
+      <a href="/marketplace.html">Marketplace</a>
+      <a href="/sell.html">Sell</a>
+      <a href="/account.html" id="nav-account" style="display:none">Account</a>
+      <a href="/login.html" class="nav-cta" id="nav-login">Sign In</a>
+    </div>
+  </div></nav>
+<section class="hero" style="padding:80px 32px 60px">
+  <span class="badge">Verified by PARALLEL</span>
+  <h1 style="font-size:clamp(40px,6vw,72px)">The <em>Marketplace</em></h1>
+  <p class="lede">Sealed product from approved sellers. Every listing is inspected, authenticated, and shipped by PARALLEL.</p>
+</section>
+<section class="section">
+  <div id="market-status" class="center muted mb-4">Loading listings...</div>
+  <div id="market-grid" class="grid"></div>
+</section>
+<footer class="foot"><div class="foot-inner">
+    <div>
+      <div class="brand">PARALLEL<span style="color:var(--gold)">.</span></div>
+      <div class="dim" style="margin-top:10px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase">Below market. Verified.</div>
+    </div>
+    <div class="foot-links">
+      <a href="/marketplace.html">Marketplace</a>
+      <a href="/sell.html">Sell</a>
+      <a href="/account.html">Account</a>
+      <a href="mailto:hello@paralleltrading.net">Contact</a>
+    </div>
+  </div>
+  <p class="foot-disclaim">PARALLEL is an independent reseller of factory-sealed trading card products. PARALLEL is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, Creatures Inc., The Pokemon Company International, or any other rights holder. All trademarks are the property of their respective owners. Every order ships with proof of purchase. &copy; 2026 PARALLEL.</p>
+  </footer>
+  <script type="module">
+    import { getCurrentUser, signOut } from '/js/supabase-client.js';
+    (async () => {
+      const u = await getCurrentUser();
+      const login = document.getElementById('nav-login');
+      const account = document.getElementById('nav-account');
+      if (u) {
+        if (login) { login.textContent = 'Sign Out'; login.href = '#'; login.onclick = (e) => { e.preventDefault(); signOut(); }; }
+        if (account) account.style.display = '';
+      }
+    })();
+  </script>
+<script type="module">
+  import { supabase } from '/js/supabase-client.js';
+  const grid = document.getElementById('market-grid');
+  const status = document.getElementById('market-status');
+  const { data, error } = await supabase.from('listings').select('*').eq('is_active', true).order('created_at', { ascending: false });
+  if (error) { status.textContent = 'Could not load listings.'; status.classList.add('alert','alert-error'); }
+  else if (!data || data.length === 0) { status.innerHTML = '<em style="font-family:var(--serif);font-size:24px;font-weight:300">No listings yet. Be the first — <a href="/sell.html" style="color:var(--gold);border-bottom:1px solid var(--gold-dim)">submit your item</a>.</em>'; }
+  else {
+    status.style.display = 'none';
+    grid.innerHTML = data.map(l => {
+      const photos = Array.isArray(l.photo_urls) ? l.photo_urls : [];
+      const cover = photos[0] || '';
+      const media = cover
+        ? `<div class="card-media"><img src="${cover}" alt="${l.product_name||''}"></div>`
+        : `<div class="card-media"><div class="wordmark">PARALLEL<span class="dot">.</span></div><div class="pname">${l.product_name||''}</div></div>`;
+      return `<article class="card">${media}<div class="card-body">
+        <div class="verified">Verified by PARALLEL</div>
+        <h3 class="card-title">${l.product_name||'Item'}</h3>
+        <div class="card-tag">Factory Sealed</div>
+        <div class="card-price"><span class="now">$${Number(l.list_price||0).toFixed(2)}</span></div>
+        <button class="btn btn-gold" data-lid="${l.id}">Buy Now</button>
+      </div></article>`;
+    }).join('');
+  }
+</script>
+</body></html>

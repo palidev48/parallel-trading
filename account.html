@@ -1,0 +1,92 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Account - PARALLEL</title>
+<meta name="description" content="Your PARALLEL account dashboard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/parallel.css">
+</head><body>
+<nav class="nav"><div class="nav-inner">
+    <a href="/" class="brand">PARALLEL<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="/">Drops</a>
+      <a href="/marketplace.html">Marketplace</a>
+      <a href="/sell.html">Sell</a>
+      <a href="/account.html" id="nav-account" style="display:none">Account</a>
+      <a href="/login.html" class="nav-cta" id="nav-login">Sign In</a>
+    </div>
+  </div></nav>
+<div class="section" style="max-width:1000px">
+  <div class="section-head" style="text-align:left">
+    <div class="eyebrow">Your Account</div>
+    <h2 id="hello" style="text-align:left">Welcome.</h2>
+  </div>
+  <div id="content"></div>
+</div>
+<footer class="foot"><div class="foot-inner">
+    <div>
+      <div class="brand">PARALLEL<span style="color:var(--gold)">.</span></div>
+      <div class="dim" style="margin-top:10px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase">Below market. Verified.</div>
+    </div>
+    <div class="foot-links">
+      <a href="/marketplace.html">Marketplace</a>
+      <a href="/sell.html">Sell</a>
+      <a href="/account.html">Account</a>
+      <a href="mailto:hello@paralleltrading.net">Contact</a>
+    </div>
+  </div>
+  <p class="foot-disclaim">PARALLEL is an independent reseller of factory-sealed trading card products. PARALLEL is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, Creatures Inc., The Pokemon Company International, or any other rights holder. All trademarks are the property of their respective owners. Every order ships with proof of purchase. &copy; 2026 PARALLEL.</p>
+  </footer>
+  <script type="module">
+    import { getCurrentUser, signOut } from '/js/supabase-client.js';
+    (async () => {
+      const u = await getCurrentUser();
+      const login = document.getElementById('nav-login');
+      const account = document.getElementById('nav-account');
+      if (u) {
+        if (login) { login.textContent = 'Sign Out'; login.href = '#'; login.onclick = (e) => { e.preventDefault(); signOut(); }; }
+        if (account) account.style.display = '';
+      }
+    })();
+  </script>
+<script type="module">
+  import { supabase, requireAuth, getProfile, isAdmin } from '/js/supabase-client.js';
+  const user = await requireAuth();
+  if (!user) { /* redirected */ }
+  else {
+    const profile = await getProfile();
+    document.getElementById('hello').innerHTML = 'Hello, <em style="font-family:var(--serif);font-style:italic;color:var(--gold)">' + (profile?.display_name || user.email) + '</em>.';
+    const admin = await isAdmin();
+    const content = document.getElementById('content');
+
+    const { data: subs } = await supabase.from('submissions').select('*').eq('user_id', user.id).order('created_at', { ascending: false });
+    const { data: orders } = await supabase.from('orders').select('*').eq('user_id', user.id).order('created_at', { ascending: false });
+
+    let html = '';
+    if (admin) html += '<div class="alert alert-ok mb-4">Admin access enabled. <a href="/admin.html" style="color:var(--gold)">Open admin panel</a></div>';
+
+    html += '<h3 style="font-family:var(--serif);font-weight:300;font-size:28px;margin-top:32px">Your Submissions</h3>';
+    if (!subs || subs.length === 0) html += '<p class="muted mt-2">No submissions yet. <a href="/sell.html" style="color:var(--gold)">Submit one</a>.</p>';
+    else {
+      html += '<table class="table"><thead><tr><th>Date</th><th>Item</th><th>Qty</th><th>Asking</th><th>Status</th></tr></thead><tbody>';
+      for (const s of subs) {
+        html += `<tr><td>${new Date(s.created_at).toLocaleDateString()}</td><td>${s.product_name}</td><td>${s.quantity}</td><td>$${Number(s.asking_price).toFixed(2)}</td><td><span class="status-pill status-${s.status}">${s.status}</span></td></tr>`;
+      }
+      html += '</tbody></table>';
+    }
+
+    html += '<h3 style="font-family:var(--serif);font-weight:300;font-size:28px;margin-top:48px">Your Orders</h3>';
+    if (!orders || orders.length === 0) html += '<p class="muted mt-2">No orders yet.</p>';
+    else {
+      html += '<table class="table"><thead><tr><th>Date</th><th>Order</th><th>Total</th><th>Status</th></tr></thead><tbody>';
+      for (const o of orders) {
+        html += `<tr><td>${new Date(o.created_at).toLocaleDateString()}</td><td>${o.id.slice(0,8)}</td><td>$${Number(o.total||0).toFixed(2)}</td><td><span class="status-pill status-${o.status}">${o.status}</span></td></tr>`;
+      }
+      html += '</tbody></table>';
+    }
+
+    content.innerHTML = html;
+  }
+</script>
+</body></html>

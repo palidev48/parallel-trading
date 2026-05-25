@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin - PARALLEL</title>
+<meta name="description" content="PARALLEL admin panel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/parallel.css">
+</head><body>
+<nav class="nav"><div class="nav-inner">
+    <a href="/" class="brand">PARALLEL<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="/">Drops</a>
+      <a href="/marketplace.html">Marketplace</a>
+      <a href="/sell.html">Sell</a>
+      <a href="/account.html" id="nav-account" style="display:none">Account</a>
+      <a href="/login.html" class="nav-cta" id="nav-login">Sign In</a>
+    </div>
+  </div></nav>
+<div class="section" style="max-width:1200px">
+  <div class="section-head" style="text-align:left">
+    <div class="eyebrow">Admin</div>
+    <h2 style="text-align:left">Submissions Queue</h2>
+  </div>
+  <div id="gate"></div>
+  <div id="content"></div>
+</div>
+<footer class="foot"><div class="foot-inner">
+    <div>
+      <div class="brand">PARALLEL<span style="color:var(--gold)">.</span></div>
+      <div class="dim" style="margin-top:10px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase">Below market. Verified.</div>
+    </div>
+    <div class="foot-links">
+      <a href="/marketplace.html">Marketplace</a>
+      <a href="/sell.html">Sell</a>
+      <a href="/account.html">Account</a>
+      <a href="mailto:hello@paralleltrading.net">Contact</a>
+    </div>
+  </div>
+  <p class="foot-disclaim">PARALLEL is an independent reseller of factory-sealed trading card products. PARALLEL is not affiliated with, endorsed by, or sponsored by Nintendo, Game Freak, Creatures Inc., The Pokemon Company International, or any other rights holder. All trademarks are the property of their respective owners. Every order ships with proof of purchase. &copy; 2026 PARALLEL.</p>
+  </footer>
+  <script type="module">
+    import { getCurrentUser, signOut } from '/js/supabase-client.js';
+    (async () => {
+      const u = await getCurrentUser();
+      const login = document.getElementById('nav-login');
+      const account = document.getElementById('nav-account');
+      if (u) {
+        if (login) { login.textContent = 'Sign Out'; login.href = '#'; login.onclick = (e) => { e.preventDefault(); signOut(); }; }
+        if (account) account.style.display = '';
+      }
+    })();
+  </script>
+<script type="module">
+  import { supabase, requireAuth, isAdmin } from '/js/supabase-client.js';
+  const user = await requireAuth();
+  if (!user) { /* redirected */ }
+  else {
+    const admin = await isAdmin();
+    if (!admin) {
+      document.getElementById('gate').innerHTML = '<div class="alert alert-error">Admin access required. Your account is not flagged as admin.</div>';
+    } else {
+      const { data: subs } = await supabase.from('submissions').select('*').order('created_at', { ascending: false });
+      const content = document.getElementById('content');
+      if (!subs || subs.length === 0) content.innerHTML = '<p class="muted">No submissions yet.</p>';
+      else {
+        content.innerHTML = '<table class="table"><thead><tr><th>Date</th><th>Item</th><th>Qty</th><th>Asking</th><th>List @</th><th>Receipt</th><th>Status</th><th>Actions</th></tr></thead><tbody>' +
+          subs.map(s => `<tr data-id="${s.id}"><td>${new Date(s.created_at).toLocaleDateString()}</td><td>${s.product_name}</td><td>${s.quantity}</td><td>$${Number(s.asking_price).toFixed(2)}</td><td><input type="number" step="0.01" class="list-price" style="width:90px;padding:6px;background:var(--surface);border:1px solid var(--border-2);color:var(--text)" value="${(Number(s.asking_price)*1.25).toFixed(2)}"></td><td><button class="btn view-receipt" style="width:auto;padding:6px 12px;font-size:10px" data-path="${s.receipt_path||''}">View</button></td><td><span class="status-pill status-${s.status}">${s.status}</span></td><td><button class="btn btn-gold approve" style="width:auto;padding:6px 12px;font-size:10px">Approve & List</button> <button class="btn reject" style="width:auto;padding:6px 12px;font-size:10px;margin-left:6px">Reject</button></td></tr>`).join('') + '</tbody></table>';
+
+        content.addEventListener('click', async (e) => {
+          const tr = e.target.closest('tr'); if (!tr) return;
+          const id = tr.dataset.id;
+          if (e.target.classList.contains('view-receipt')) {
+            const path = e.target.dataset.path;
+            const { data, error } = await supabase.storage.from('receipts').createSignedUrl(path, 600);
+            if (data?.signedUrl) window.open(data.signedUrl, '_blank');
+            else alert('Could not generate receipt URL: ' + (error?.message || 'unknown'));
+          } else if (e.target.classList.contains('approve')) {
+            const price = parseFloat(tr.querySelector('.list-price').value);
+            const sub = subs.find(s => s.id === id);
+            await supabase.from('submissions').update({ status: 'approved' }).eq('id', id);
+            await supabase.from('listings').insert({ submission_id: id, product_name: sub.product_name, list_price: price, photo_urls: sub.photo_urls, is_active: true });
+            tr.querySelector('.status-pill').className = 'status-pill status-approved';
+            tr.querySelector('.status-pill').textContent = 'approved';
+          } else if (e.target.classList.contains('reject')) {
+            if (!confirm('Reject this submission?')) return;
+            await supabase.from('submissions').update({ status: 'rejected' }).eq('id', id);
+            tr.querySelector('.status-pill').className = 'status-pill status-rejected';
+            tr.querySelector('.status-pill').textContent = 'rejected';
+          }
+        });
+      }
+    }
+  }
+</script>
+</body></html>
