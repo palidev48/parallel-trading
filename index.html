@@ -52,6 +52,30 @@
 @media(max-width:1100px){.poke-hero,.poke-hero-mid-l,.poke-hero-mid-r{opacity:.45!important;width:180px}}
 @media(max-width:780px){.poke-hero,.poke-hero-mid-l,.poke-hero-mid-r{display:none}}
 @media(prefers-reduced-motion:reduce){.poke-hero,.poke-hero-mid-l,.poke-hero-mid-r{animation:none!important;opacity:.85!important}}
+
+.ebay-card{position:fixed;bottom:24px;left:24px;width:280px;background:#0a0a0a;border:1px solid var(--border);border-radius:4px;padding:14px 14px 12px;z-index:50;box-shadow:0 12px 36px rgba(0,0,0,0.6),0 0 0 1px rgba(211,47,47,0.08);font-family:var(--sans);transition:transform .25s ease,opacity .25s ease;backdrop-filter:blur(6px);background:rgba(10,10,10,0.92)}
+.ebay-card.ebay-hidden{transform:translateY(140%);opacity:0;pointer-events:none}
+.ebay-card .ec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border-2)}
+.ebay-card .ec-eyebrow{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--pk-red);font-weight:700;display:flex;align-items:center;gap:6px}
+.ebay-card .ec-eyebrow .ec-pulse{width:6px;height:6px;border-radius:50%;background:var(--pk-red);box-shadow:0 0 0 0 rgba(211,47,47,0.7);animation:ec-pulse 1.8s infinite}
+@keyframes ec-pulse{0%{box-shadow:0 0 0 0 rgba(211,47,47,0.6)}70%{box-shadow:0 0 0 8px rgba(211,47,47,0)}100%{box-shadow:0 0 0 0 rgba(211,47,47,0)}}
+.ebay-card .ec-title{font-size:13px;font-weight:700;color:var(--text);letter-spacing:-0.005em;margin-top:2px}
+.ebay-card .ec-close{background:none;border:none;color:var(--text-2);font-size:18px;line-height:1;cursor:pointer;padding:0 4px;font-family:inherit}
+.ebay-card .ec-close:hover{color:var(--text)}
+.ebay-card .ec-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:8px 0;opacity:0;animation:ec-fade-in .4s ease-out forwards;border-bottom:1px dashed rgba(255,255,255,0.04)}
+.ebay-card .ec-row:last-of-type{border-bottom:none}
+@keyframes ec-fade-in{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+.ebay-card .ec-item{flex:1;min-width:0}
+.ebay-card .ec-name{font-size:11.5px;font-weight:600;color:var(--text);line-height:1.3;letter-spacing:-0.005em;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.ebay-card .ec-date{font-size:9px;color:var(--text-2);margin-top:2px;letter-spacing:.05em;text-transform:uppercase;font-weight:500}
+.ebay-card .ec-price{font-size:14px;font-weight:800;color:var(--pk-red);white-space:nowrap;letter-spacing:-0.01em}
+.ebay-card .ec-foot{margin-top:8px;padding-top:8px;border-top:1px solid var(--border-2);display:flex;align-items:center;justify-content:space-between;font-size:9px;color:var(--text-2);letter-spacing:.1em;text-transform:uppercase}
+.ebay-card .ec-foot a{color:var(--text-2);text-decoration:none}
+.ebay-card .ec-foot a:hover{color:var(--text)}
+.ebay-reopen{position:fixed;bottom:24px;left:24px;width:auto;padding:8px 12px;background:#0a0a0a;border:1px solid var(--border);border-radius:20px;color:var(--text-2);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;font-family:var(--sans);cursor:pointer;z-index:49;display:none;align-items:center;gap:6px}
+.ebay-reopen.show{display:inline-flex}
+.ebay-reopen .ec-pulse{width:5px;height:5px;border-radius:50%;background:var(--pk-red);animation:ec-pulse 1.8s infinite}
+@media(max-width:780px){.ebay-card,.ebay-reopen{display:none!important}}
 </style>
 </head>
 <body>
@@ -294,5 +318,69 @@
       window.PARALLEL_CART.add(btn.dataset.pid, 1);
     });
   });
-if(window.PARALLEL_PRODUCTS){var __p=window.PARALLEL_PRODUCTS;var __tN=0,__tM=0;for(var __k in __p){__tN+=__p[__k].price;__tM+=__p[__k].market;}var __save=__tM-__tN;var __pct=__tM?((__save/__tM)*100):0;var __pctStr=__pct.toFixed(1)+'%';var __amtStr='$'+Math.round(__save);var __set=function(sel,val){document.querySelectorAll(sel).forEach(function(el){el.textContent=val;});};__set('[data-save-pct-left]','YOU SAVE '+__pctStr);__set('[data-save-pct-right]','YOU SAVE '+__pctStr);__set('[data-save-amount-left]',__amtStr);__set('[data-save-pct-badge-right]',__pctStr);}})();</script></body>
+if(window.PARALLEL_PRODUCTS){var __p=window.PARALLEL_PRODUCTS;var __tN=0,__tM=0;for(var __k in __p){__tN+=__p[__k].price;__tM+=__p[__k].market;}var __save=__tM-__tN;var __pct=__tM?((__save/__tM)*100):0;var __pctStr=__pct.toFixed(1)+'%';var __amtStr='$'+Math.round(__save);var __set=function(sel,val){document.querySelectorAll(sel).forEach(function(el){el.textContent=val;});};__set('[data-save-pct-left]','YOU SAVE '+__pctStr);__set('[data-save-pct-right]','YOU SAVE '+__pctStr);__set('[data-save-amount-left]',__amtStr);__set('[data-save-pct-badge-right]',__pctStr);}})();</script>
+<aside class="ebay-card" id="ebayCard" aria-label="Recent eBay sold listings">
+  <div class="ec-head">
+    <div>
+      <div class="ec-eyebrow"><span class="ec-pulse"></span>What People Paid on eBay</div>
+      <div class="ec-title">Recent sold listings</div>
+    </div>
+    <button class="ec-close" id="ebayCardClose" aria-label="Close">&times;</button>
+  </div>
+  <div class="ec-list" id="ebayCardList"></div>
+  <div class="ec-foot">
+    <span>Source: eBay sold</span>
+    <a href="https://www.ebay.com/sch/i.html?_nkw=pokemon+sealed&LH_Sold=1&LH_Complete=1" target="_blank" rel="noopener">View on eBay &rarr;</a>
+  </div>
+</aside>
+<button class="ebay-reopen" id="ebayReopen" aria-label="Show recent eBay sold listings"><span class="ec-pulse"></span>eBay sold</button>
+<script>
+(function(){
+  var comps = [
+    {name:"Perfect Order PC ETB", price:"$122.00", date:"May 23", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+mega+evolution+perfect+order+pokemon+center+elite+trainer+box&LH_Sold=1&LH_Complete=1"},
+    {name:"Prismatic Surprise Box", price:"$74.95", date:"May 24", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+prismatic+evolutions+surprise+box&LH_Sold=1&LH_Complete=1"},
+    {name:"Chaos Rising ETB", price:"$90.00", date:"May 25", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+chaos+rising+elite+trainer+box&LH_Sold=1&LH_Complete=1"},
+    {name:"Moonlit Tin - Mega Gengar", price:"$49.99", date:"May 24", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+moonlit+tin+mega+gengar&LH_Sold=1&LH_Complete=1"},
+    {name:"Triple Whammy Tin", price:"$29.86", date:"May 25", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+triple+whammy+tin&LH_Sold=1&LH_Complete=1"},
+    {name:"Hop's Zacian ex Box", price:"$44.26", date:"May 25", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+hops+zacian+ex+box&LH_Sold=1&LH_Complete=1"}
+  ];
+  var SHOW = 3;
+  var idx = 0;
+  var list = document.getElementById('ebayCardList');
+  var card = document.getElementById('ebayCard');
+  var reopen = document.getElementById('ebayReopen');
+  if (!list) return;
+  function render(){
+    var html = '';
+    for (var i = 0; i < SHOW; i++) {
+      var c = comps[(idx + i) % comps.length];
+      html += '<a class="ec-row" href="' + c.url + '" target="_blank" rel="noopener" style="text-decoration:none;animation-delay:' + (i*0.08) + 's">'
+        + '<div class="ec-item"><div class="ec-name">' + c.name + '</div><div class="ec-date">Sold ' + c.date + '</div></div>'
+        + '<div class="ec-price">' + c.price + '</div></a>';
+    }
+    list.innerHTML = html;
+    idx = (idx + SHOW) % comps.length;
+  }
+  render();
+  var rotateTimer = setInterval(render, 5000);
+  document.getElementById('ebayCardClose').addEventListener('click', function(){
+    card.classList.add('ebay-hidden');
+    reopen.classList.add('show');
+    try { sessionStorage.setItem('ebayCardClosed', '1'); } catch(e){}
+  });
+  reopen.addEventListener('click', function(){
+    card.classList.remove('ebay-hidden');
+    reopen.classList.remove('show');
+    try { sessionStorage.removeItem('ebayCardClosed'); } catch(e){}
+  });
+  try {
+    if (sessionStorage.getItem('ebayCardClosed') === '1') {
+      card.classList.add('ebay-hidden');
+      reopen.classList.add('show');
+    }
+  } catch(e){}
+})();
+</script>
+
+</body>
 </html>
