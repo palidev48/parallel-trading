@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PARALLEL - Order Confirmed</title>
+<link rel="stylesheet" href="/css/parallel.css">
+<style>
+  .success-wrap{max-width:680px;margin:0 auto;padding:120px 40px 80px;text-align:center}
+  .success-mark{width:80px;height:80px;border-radius:50%;background:var(--pk-red,#d32f2f);display:inline-flex;align-items:center;justify-content:center;margin-bottom:32px}
+  .success-mark svg{width:36px;height:36px;stroke:#fff;stroke-width:3;fill:none}
+  .success-wrap h1{font-family:var(--serif);font-size:48px;font-weight:400;margin-bottom:16px}
+  .success-wrap .eyebrow{font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:var(--pk-gold,#c9a961);margin-bottom:24px}
+  .success-wrap .lede{color:var(--text-2);font-size:17px;line-height:1.65;margin:0 auto 40px;max-width:520px}
+  .success-meta{border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;padding:24px 0;margin:40px 0;display:flex;justify-content:space-around;flex-wrap:wrap;gap:16px}
+  .success-meta div{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--text-3)}
+  .success-meta strong{display:block;font-size:14px;color:var(--text);letter-spacing:0.04em;margin-top:6px;text-transform:none}
+  .success-cta{display:inline-block;background:var(--pk-red,#d32f2f);color:#fff;padding:16px 40px;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;text-decoration:none;font-weight:700;border:1px solid var(--pk-red,#d32f2f);transition:opacity .2s}
+  .success-cta:hover{opacity:.88}
+  .success-secondary{display:inline-block;margin-left:12px;color:var(--text-2);padding:16px 24px;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;text-decoration:none}
+  .success-secondary:hover{color:var(--text)}
+</style>
+</head>
+<body>
+<div class="frame-top"></div><div class="frame-right"></div><div class="frame-bottom"></div><div class="frame-left"></div>
+<nav class="nav"><div class="nav-inner">
+  <a href="/" class="brand"><span class="brand-rule"></span><span class="label">PARALLEL<span class="dot">.</span></span><span class="brand-rule"></span></a>
+  <div class="nav-links">
+    <a href="/">Drops</a>
+    <a href="/marketplace.html">Marketplace</a>
+    <a href="/sell.html">Sell</a>
+    <a href="/cart.html" style="position:relative">Bag <span data-cart-badge style="display:none;background:var(--pk-red);color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;margin-left:4px"></span></a>
+  </div>
+</div></nav>
+
+<main class="success-wrap">
+  <div class="success-mark"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></div>
+  <div class="eyebrow">Order 001 - Confirmed</div>
+  <h1>Sealed. Sourced. Shipping.</h1>
+  <p class="lede">Thanks for your order. A receipt has been sent to your email. Every PARALLEL order ships factory-sealed with proof of purchase from an authorized retailer.</p>
+
+  <div class="success-meta">
+    <div>Order ID<strong id="order-id">-</strong></div>
+    <div>Ships<strong>3-7 business days</strong></div>
+    <div>Tracking<strong>Emailed on dispatch</strong></div>
+  </div>
+
+  <a href="/" class="success-cta">Back to Drops</a>
+  <a href="/marketplace.html" class="success-secondary">Browse Marketplace</a>
+</main>
+
+<script src="/js/products.js"></script>
+<script src="/js/cart.js"></script>
+<script>
+(function(){
+  // Clear cart on successful checkout
+  try { if (window.PARALLEL_CART && window.PARALLEL_CART.clear) window.PARALLEL_CART.clear(); } catch(e){}
+  // Show session id (truncated) if Stripe returned one
+  var params = new URLSearchParams(window.location.search);
+  var sid = params.get('session_id');
+  if (sid) {
+    var el = document.getElementById('order-id');
+    if (el) el.textContent = sid.substring(0, 12).toUpperCase();
+  }
+})();
+</script>
+</body>
+</html>
