@@ -1,14 +1,16 @@
 /* PARALLEL — global luxury styles */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#000;--bg-2:#0a0a0a;--surface:#121212;--surface-2:#1a1a1a;
-  --text:#fafafa;--text-2:#a0a0a0;--text-3:#666;
-  --gold:#c9a961;--gold-dim:#8a7340;
-  --pk-red:#d32f2f;--pk-blue:#1e3a8a;--pk-gold:#d4af37;
-  --border:#1f1f1f;--border-2:#2a2a2a;
-  --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-  --mono:'JetBrains Mono','SF Mono',Menlo,monospace;
+--bg:#000;--bg-2:#0a0a0a;--surface:#121212;--surface-2:#1a1a1a;
+--text:#fafafa;--text-2:#a0a0a0;--text-3:#666;
+--gold:#c9a961;--gold-dim:#8a7340;
+--pk-red:#d32f2f;--pk-blue:#1e3a8a;--pk-gold:#d4af37;
+--border:#1f1f1f;--border-2:#2a2a2a;
+--serif:'Cormorant Garamond',Georgia,serif;
+--sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+--mono:'JetBrains Mono','SF Mono',Menlo,monospace;
+--frame-inset:18px;
+--frame-corner-gap:18px;
 }
 html{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body{min-height:100vh;background:var(--bg);line-height:1.6;font-size:15px;font-weight:400}
@@ -124,32 +126,29 @@ img{max-width:100%;display:block}
 .mb-1{margin-bottom:8px}.mb-2{margin-bottom:16px}.mb-3{margin-bottom:24px}.mb-4{margin-bottom:32px}
 
 @media(max-width:680px){
-  .nav-inner{padding:14px 20px;gap:16px;flex-wrap:wrap}
-  .nav-links{gap:18px;flex-wrap:wrap}
-  .hero{padding:80px 20px 60px}
-  .section{padding:64px 20px}
-  .standard{padding:60px 20px}
-  .standard-grid{gap:32px}
-  .form-wrap{padding:48px 20px}
-  .field-row{grid-template-columns:1fr}
+.nav-inner{padding:14px 20px;gap:16px;flex-wrap:wrap}
+.nav-links{gap:18px;flex-wrap:wrap}
+.hero{padding:80px 20px 60px}
+.section{padding:64px 20px}
+.standard{padding:60px 20px}
+.standard-grid{gap:32px}
+.form-wrap{padding:48px 20px}
+.field-row{grid-template-columns:1fr}
 }
-
 
 /* ===== PARALLEL frame + brand accent lines ===== */
 html{background:#000}
-body{position:relative}
-/* Fixed full-viewport frame in PARALLEL red */
+body{position:relative;padding:var(--frame-inset) 0}
+/* Fixed inset frame in PARALLEL red — four parallel lines that DO NOT touch at the corners */
 .frame-top,.frame-right,.frame-bottom,.frame-left{
-  position:fixed;background:var(--pk-red);z-index:1000;pointer-events:none;
+position:fixed;background:var(--pk-red);z-index:1000;pointer-events:none;
 }
-.frame-top{top:0;left:0;right:0;height:2px}
-.frame-bottom{bottom:0;left:0;right:0;height:2px}
-.frame-left{top:0;bottom:0;left:0;width:2px}
-.frame-right{top:0;bottom:0;right:0;width:2px}
-
-/* Inset all content so it sits inside the frame */
-.nav,.foot,.hero,.hero-bold,.section,.standard,.cta-band,.cta-band-bold,.form-wrap{margin-left:14px;margin-right:14px}
-body{padding-top:14px;padding-bottom:14px}
+/* Horizontal rails: inset from top/bottom; stop short of the corners so they don't meet the vertical rails */
+.frame-top{top:var(--frame-inset);left:calc(var(--frame-inset) + var(--frame-corner-gap));right:calc(var(--frame-inset) + var(--frame-corner-gap));height:2px}
+.frame-bottom{bottom:var(--frame-inset);left:calc(var(--frame-inset) + var(--frame-corner-gap));right:calc(var(--frame-inset) + var(--frame-corner-gap));height:2px}
+/* Vertical rails: inset from left/right; stop short of the corners so they don't meet the horizontal rails */
+.frame-left{left:var(--frame-inset);top:calc(var(--frame-inset) + var(--frame-corner-gap));bottom:calc(var(--frame-inset) + var(--frame-corner-gap));width:2px}
+.frame-right{right:var(--frame-inset);top:calc(var(--frame-inset) + var(--frame-corner-gap));bottom:calc(var(--frame-inset) + var(--frame-corner-gap));width:2px}
 
 /* Brand wordmark with parallel red lines above and below */
 .brand{display:inline-flex;flex-direction:column;align-items:flex-start;gap:5px;line-height:1;padding:0}
@@ -158,8 +157,7 @@ body{padding-top:14px;padding-bottom:14px}
 .brand .label .dot{color:var(--pk-red)}
 
 @media(max-width:680px){
-  .nav,.foot,.hero,.hero-bold,.section,.standard,.cta-band,.cta-band-bold,.form-wrap{margin-left:10px;margin-right:10px}
-  body{padding-top:10px;padding-bottom:10px}
-  .frame-top,.frame-bottom{height:2px}
-  .frame-left,.frame-right{width:2px}
+:root{--frame-inset:12px;--frame-corner-gap:12px}
+.frame-top,.frame-bottom{height:2px}
+.frame-left,.frame-right{width:2px}
 }
