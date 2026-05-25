@@ -43,6 +43,7 @@
       <a href="/">Drops</a>
       <a href="/marketplace.html">Marketplace</a>
       <a href="/sell.html">Sell</a>
+      <a href="/cart.html" style="position:relative">Bag <span data-cart-badge style="display:none;background:var(--pk-red);color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;margin-left:4px"></span></a>
       <a href="/account.html" id="nav-account" style="display:none">Account</a>
       <a href="/login.html" class="nav-cta" id="nav-login">Sign In</a>
     </div>
@@ -250,5 +251,30 @@
       }
     })();
   </script>
+
+<script src="/js/products.js"></script>
+<script src="/js/cart.js"></script>
+<script>
+(function(){
+  document.querySelectorAll('article.card').forEach(function(card){
+    const btn = card.querySelector('button.btn[data-pid]');
+    if (!btn) return;
+    const pid = btn.dataset.pid;
+    const media = card.querySelector('.card-media');
+    const title = card.querySelector('.card-title, h3');
+    [media, title].forEach(function(el){
+      if (!el) return;
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', function(){ location.href = '/product.html?id=' + pid; });
+    });
+  });
+  document.querySelectorAll('button.btn[data-pid]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      window.PARALLEL_CART.add(btn.dataset.pid, 1);
+    });
+  });
+})();
+</script>
 </body>
 </html>
