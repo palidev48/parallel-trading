@@ -33,6 +33,23 @@
   .cta-band-bold{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 32px;text-align:center}
   .btn-red{background:var(--pk-red);border:1px solid var(--pk-red);color:#fff;padding:14px 36px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;width:auto;border-radius:2px;font-family:inherit;cursor:pointer;transition:all .15s}
   .btn-red:hover{background:#ef4444;border-color:#ef4444}
+
+.drop-section{position:relative;overflow:hidden}
+.drop-section>*{position:relative;z-index:2}
+.poke-hero{position:absolute;top:60px;width:240px;max-width:18%;min-width:140px;pointer-events:none;z-index:1;opacity:0;animation:poke-rise 1.4s ease-out forwards}
+.poke-hero-left{left:-20px;animation-delay:.2s}
+.poke-hero-right{right:-20px;animation-delay:.5s;transform:scaleX(-1)}
+.poke-hero svg{width:100%;height:auto;display:block;filter:drop-shadow(0 8px 32px rgba(211,47,47,0.35)) drop-shadow(0 0 14px rgba(255,203,5,0.18))}
+.poke-hero .pk-glow{fill:url(#pkGlow);opacity:.6}
+.poke-hero-mid-l{position:absolute;left:-30px;top:50%;width:220px;max-width:16%;min-width:130px;pointer-events:none;z-index:1;opacity:0;animation:poke-rise 1.4s ease-out .8s forwards}
+.poke-hero-mid-r{position:absolute;right:-30px;top:50%;width:220px;max-width:16%;min-width:130px;pointer-events:none;z-index:1;opacity:0;animation:poke-rise 1.4s ease-out 1.0s forwards;transform:scaleX(-1)}
+.poke-hero-mid-l svg,.poke-hero-mid-r svg{width:100%;height:auto;display:block;filter:drop-shadow(0 8px 28px rgba(59,130,246,0.30)) drop-shadow(0 0 12px rgba(255,203,5,0.15))}
+@keyframes poke-rise{from{opacity:0;transform:translateY(20px)}to{opacity:.88;transform:translateY(0)}}
+.poke-hero-right,.poke-hero-mid-r{animation-name:poke-rise-r}
+@keyframes poke-rise-r{from{opacity:0;transform:translateY(20px) scaleX(-1)}to{opacity:.88;transform:translateY(0) scaleX(-1)}}
+@media(max-width:1100px){.poke-hero,.poke-hero-mid-l,.poke-hero-mid-r{opacity:.45!important;width:180px}}
+@media(max-width:780px){.poke-hero,.poke-hero-mid-l,.poke-hero-mid-r{display:none}}
+@media(prefers-reduced-motion:reduce){.poke-hero,.poke-hero-mid-l,.poke-hero-mid-r{animation:none!important;opacity:.85!important}.poke-hero-right,.poke-hero-mid-r{transform:scaleX(-1)!important}}
 </style>
 </head>
 <body>
@@ -60,7 +77,207 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section drop-section">
+  <div class="poke-hero poke-hero-left" aria-hidden="true">
+    <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="pkGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#ffcb05" stop-opacity=".55"/>
+          <stop offset="60%" stop-color="#d32f2f" stop-opacity=".15"/>
+          <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="charGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ff7a1a"/>
+          <stop offset="55%" stop-color="#d32f2f"/>
+          <stop offset="100%" stop-color="#7a1010"/>
+        </linearGradient>
+        <linearGradient id="flameGrad" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#d32f2f"/>
+          <stop offset="50%" stop-color="#ff8800"/>
+          <stop offset="100%" stop-color="#ffcb05"/>
+        </linearGradient>
+      </defs>
+      <ellipse class="pk-glow" cx="120" cy="150" rx="115" ry="135"/>
+      <!-- Tail with flame -->
+      <path d="M 65,230 Q 50,210 55,185 Q 60,170 75,170 Q 85,172 88,185 Q 86,200 80,215 Q 76,225 78,235 Q 82,250 95,245" fill="url(#charGrad)" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 50,195 Q 35,170 42,140 Q 50,125 60,135 Q 55,160 55,180 Q 52,190 50,195 Z" fill="url(#flameGrad)" opacity=".92"/>
+      <path d="M 45,180 Q 32,155 40,130 Q 46,118 52,128 Q 48,150 48,170 Z" fill="#ffcb05" opacity=".85"/>
+      <!-- Body -->
+      <path d="M 90,235 Q 75,200 80,160 Q 85,125 110,110 Q 140,100 165,115 Q 185,130 188,165 Q 188,205 175,235 Q 160,250 130,250 Q 105,250 90,235 Z" fill="url(#charGrad)" stroke="#000" stroke-width="1.8" stroke-linejoin="round"/>
+      <!-- Belly -->
+      <path d="M 105,225 Q 100,200 108,170 Q 120,160 140,162 Q 158,168 162,195 Q 160,225 145,238 Q 125,242 105,225 Z" fill="#f4d77a" opacity=".88"/>
+      <!-- Wings -->
+      <path d="M 80,150 Q 30,110 20,55 Q 55,80 85,115 Q 95,130 90,145 Z" fill="#3d5a8a" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 35,80 L 50,105 M 28,68 L 50,90 M 60,70 L 70,100" stroke="#1f2f4a" stroke-width="1.5" fill="none"/>
+      <path d="M 188,150 Q 220,115 218,70 Q 195,90 178,120 Q 175,135 188,150 Z" fill="#3d5a8a" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
+      <!-- Head -->
+      <path d="M 110,115 Q 100,90 115,70 Q 135,55 165,65 Q 185,80 185,105 Q 180,120 165,125 Q 135,125 110,115 Z" fill="url(#charGrad)" stroke="#000" stroke-width="1.8" stroke-linejoin="round"/>
+      <!-- Horns -->
+      <path d="M 130,68 L 122,42 L 138,58 Z" fill="#7a1010" stroke="#000" stroke-width="1.2"/>
+      <path d="M 162,70 L 175,45 L 170,68 Z" fill="#7a1010" stroke="#000" stroke-width="1.2"/>
+      <!-- Eye -->
+      <ellipse cx="152" cy="90" rx="6" ry="8" fill="#fff"/>
+      <ellipse cx="153" cy="92" rx="3.5" ry="5" fill="#000"/>
+      <ellipse cx="154" cy="90" rx="1.2" ry="1.8" fill="#fff"/>
+      <!-- Snout/mouth -->
+      <path d="M 168,100 Q 178,98 182,108 Q 178,114 168,112 Z" fill="#7a1010"/>
+      <path d="M 168,108 L 180,108" stroke="#000" stroke-width="1"/>
+      <!-- Spark accents -->
+      <circle cx="40" cy="160" r="2" fill="#ffcb05"/>
+      <circle cx="55" cy="250" r="1.5" fill="#ffcb05"/>
+      <circle cx="200" cy="200" r="1.8" fill="#ffcb05"/>
+    </svg>
+  </div>
+  <div class="poke-hero poke-hero-right" aria-hidden="true">
+    <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="psyGlow" cx="50%" cy="40%" r="55%">
+          <stop offset="0%" stop-color="#a855f7" stop-opacity=".55"/>
+          <stop offset="60%" stop-color="#3b82f6" stop-opacity=".18"/>
+          <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="mewGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#e9e3f5"/>
+          <stop offset="50%" stop-color="#a89cc4"/>
+          <stop offset="100%" stop-color="#4d3f6e"/>
+        </linearGradient>
+        <linearGradient id="mewTail" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#a855f7"/>
+          <stop offset="100%" stop-color="#6b3aa6"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="120" cy="140" rx="115" ry="135" fill="url(#psyGlow)"/>
+      <!-- Tail curl -->
+      <path d="M 175,240 Q 210,225 215,195 Q 215,175 200,170 Q 188,172 186,185 Q 188,200 198,205" fill="none" stroke="url(#mewTail)" stroke-width="9" stroke-linecap="round"/>
+      <!-- Body -->
+      <path d="M 90,240 Q 78,205 85,165 Q 95,135 115,120 Q 140,112 160,120 Q 180,135 185,170 Q 188,210 175,240 Q 155,252 130,252 Q 105,252 90,240 Z" fill="url(#mewGrad)" stroke="#000" stroke-width="1.8" stroke-linejoin="round"/>
+      <!-- Chest -->
+      <path d="M 105,215 Q 102,190 110,170 Q 125,160 145,165 Q 158,175 160,200 Q 155,225 140,235 Q 118,235 105,215 Z" fill="#c8bce0" opacity=".88"/>
+      <!-- Arms -->
+      <path d="M 92,170 Q 65,180 55,210 Q 55,225 70,225 Q 82,218 88,200" fill="url(#mewGrad)" stroke="#000" stroke-width="1.5"/>
+      <path d="M 178,170 Q 200,182 208,210 Q 205,225 192,222 Q 182,215 178,198" fill="url(#mewGrad)" stroke="#000" stroke-width="1.5"/>
+      <!-- Head -->
+      <path d="M 100,118 Q 92,90 108,72 Q 130,55 160,68 Q 178,85 178,108 Q 172,128 155,132 Q 125,132 100,118 Z" fill="url(#mewGrad)" stroke="#000" stroke-width="1.8" stroke-linejoin="round"/>
+      <!-- Ears/horns -->
+      <path d="M 108,75 L 95,42 L 118,62 Z" fill="#4d3f6e" stroke="#000" stroke-width="1.2"/>
+      <path d="M 168,72 L 178,38 L 180,65 Z" fill="#4d3f6e" stroke="#000" stroke-width="1.2"/>
+      <!-- Eyes -->
+      <ellipse cx="125" cy="98" rx="5" ry="9" fill="#a855f7"/>
+      <ellipse cx="155" cy="95" rx="5" ry="9" fill="#a855f7"/>
+      <ellipse cx="125" cy="100" rx="2" ry="4" fill="#fff"/>
+      <ellipse cx="155" cy="97" rx="2" ry="4" fill="#fff"/>
+      <!-- Psychic sparkles -->
+      <g fill="#a855f7" opacity=".85">
+        <circle cx="40" cy="100" r="2.5"/>
+        <circle cx="55" cy="160" r="1.8"/>
+        <circle cx="210" cy="80" r="2.2"/>
+        <circle cx="225" cy="155" r="1.5"/>
+        <circle cx="30" cy="220" r="1.7"/>
+      </g>
+      <!-- Energy orb -->
+      <circle cx="40" cy="130" r="7" fill="#a855f7" opacity=".55"/>
+      <circle cx="40" cy="130" r="3" fill="#fff" opacity=".9"/>
+    </svg>
+  </div>
+  <div class="poke-hero-mid-l" aria-hidden="true">
+    <svg viewBox="0 0 220 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="elecGlow" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="#ffcb05" stop-opacity=".55"/>
+          <stop offset="60%" stop-color="#ff8800" stop-opacity=".18"/>
+          <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="pikaGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#fff2a8"/>
+          <stop offset="55%" stop-color="#ffcb05"/>
+          <stop offset="100%" stop-color="#c89400"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="110" cy="125" rx="105" ry="115" fill="url(#elecGlow)"/>
+      <!-- Lightning bolt tail -->
+      <path d="M 175,200 L 215,175 L 195,180 L 220,150 L 188,165 L 200,140" fill="#ffcb05" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
+      <!-- Body -->
+      <ellipse cx="105" cy="155" rx="62" ry="55" fill="url(#pikaGrad)" stroke="#000" stroke-width="1.8"/>
+      <!-- Cheek circles -->
+      <circle cx="65" cy="115" r="9" fill="#d32f2f" opacity=".85"/>
+      <circle cx="145" cy="115" r="9" fill="#d32f2f" opacity=".85"/>
+      <!-- Head -->
+      <ellipse cx="105" cy="100" rx="55" ry="48" fill="url(#pikaGrad)" stroke="#000" stroke-width="1.8"/>
+      <!-- Ears -->
+      <path d="M 65,68 L 50,18 L 85,55 Z" fill="url(#pikaGrad)" stroke="#000" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M 50,18 L 58,4 L 70,28" fill="#000"/>
+      <path d="M 145,68 L 165,15 L 165,55 Z" fill="url(#pikaGrad)" stroke="#000" stroke-width="1.8" stroke-linejoin="round"/>
+      <path d="M 165,15 L 175,2 L 175,30" fill="#000"/>
+      <!-- Eyes -->
+      <circle cx="82" cy="95" r="7" fill="#000"/>
+      <circle cx="128" cy="95" r="7" fill="#000"/>
+      <circle cx="84" cy="92" r="2.5" fill="#fff"/>
+      <circle cx="130" cy="92" r="2.5" fill="#fff"/>
+      <!-- Nose -->
+      <ellipse cx="105" cy="108" rx="2.5" ry="2" fill="#000"/>
+      <!-- Mouth -->
+      <path d="M 95,118 Q 105,125 115,118" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+      <!-- Electric sparks -->
+      <g fill="#ffcb05" stroke="#000" stroke-width="1">
+        <path d="M 25,80 L 35,90 L 28,92 L 38,102"/>
+        <path d="M 185,75 L 192,82 L 187,86 L 196,93"/>
+        <path d="M 20,200 L 28,210 L 24,213 L 32,222"/>
+      </g>
+    </svg>
+  </div>
+  <div class="poke-hero-mid-r" aria-hidden="true">
+    <svg viewBox="0 0 220 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="auraGlow" cx="50%" cy="50%" r="55%">
+          <stop offset="0%" stop-color="#3b82f6" stop-opacity=".55"/>
+          <stop offset="60%" stop-color="#1e40af" stop-opacity=".18"/>
+          <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="lucGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5d8fd4"/>
+          <stop offset="50%" stop-color="#2c5ba0"/>
+          <stop offset="100%" stop-color="#15294d"/>
+        </linearGradient>
+        <linearGradient id="lucBlack" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3a3a3a"/>
+          <stop offset="100%" stop-color="#0a0a0a"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="110" cy="125" rx="105" ry="115" fill="url(#auraGlow)"/>
+      <!-- Body -->
+      <path d="M 75,225 Q 60,190 68,150 Q 80,120 105,108 Q 135,108 152,125 Q 165,150 162,190 Q 155,220 138,235 Q 105,240 75,225 Z" fill="url(#lucBlack)" stroke="#000" stroke-width="1.5"/>
+      <!-- Chest spike -->
+      <path d="M 100,150 L 115,140 L 130,150 L 115,175 Z" fill="url(#lucGrad)" stroke="#000" stroke-width="1.3"/>
+      <!-- Yellow torso accent -->
+      <ellipse cx="115" cy="195" rx="22" ry="28" fill="#f4d77a" opacity=".88"/>
+      <!-- Head -->
+      <path d="M 82,100 Q 78,70 95,55 Q 120,42 145,58 Q 158,80 155,105 Q 138,118 115,118 Q 92,115 82,100 Z" fill="url(#lucGrad)" stroke="#000" stroke-width="1.6"/>
+      <!-- Mask -->
+      <path d="M 90,90 Q 95,75 115,75 Q 140,78 148,95 Q 138,100 115,100 Q 95,98 90,90 Z" fill="url(#lucBlack)"/>
+      <!-- Eyes -->
+      <ellipse cx="103" cy="88" rx="3.5" ry="5" fill="#d32f2f"/>
+      <ellipse cx="132" cy="88" rx="3.5" ry="5" fill="#d32f2f"/>
+      <!-- Ears (long) -->
+      <path d="M 92,58 L 78,18 L 105,48 Z" fill="url(#lucGrad)" stroke="#000" stroke-width="1.4"/>
+      <path d="M 140,55 L 155,12 L 150,48 Z" fill="url(#lucGrad)" stroke="#000" stroke-width="1.4"/>
+      <!-- Snout -->
+      <path d="M 110,105 Q 122,108 130,115 Q 122,122 112,118 Z" fill="url(#lucBlack)"/>
+      <!-- Aura sphere in hand -->
+      <circle cx="55" cy="180" r="18" fill="#3b82f6" opacity=".65"/>
+      <circle cx="55" cy="180" r="10" fill="#a8c8f5" opacity=".85"/>
+      <circle cx="55" cy="180" r="4" fill="#fff"/>
+      <!-- Arm to aura -->
+      <path d="M 78,170 Q 65,175 60,180" stroke="url(#lucBlack)" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <!-- Aura sparks -->
+      <g fill="#3b82f6" opacity=".9">
+        <circle cx="35" cy="155" r="2"/>
+        <circle cx="75" cy="155" r="1.5"/>
+        <circle cx="40" cy="205" r="1.8"/>
+        <circle cx="190" cy="100" r="2"/>
+        <circle cx="195" cy="175" r="1.6"/>
+      </g>
+    </svg>
+  </div>
   <div class="section-head">
     <div class="eyebrow-red">In Stock</div>
     <h2 class="h-bold">Drop Collection</h2>
@@ -74,7 +291,7 @@
             <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Triple Whammy Tin</h3>
             <div class="card-tag">Walgreens / CVS Exclusive</div>
             <div class="card-price">
-              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$22.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$24.99</span>
               <span class="market">Market $26.99</span>
             </div>
             <button class="btn" data-pid="triple-whammy-tin">Add to Bag</button>
