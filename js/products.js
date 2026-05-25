@@ -5,7 +5,7 @@ window.PARALLEL_PRODUCTS = {
     title: "Pokémon TCG: Triple Whammy Tin",
     tag: "Walgreens / CVS Exclusive",
     image: "/images/triple-whammy-tin.jpg",
-    price: 22.99,
+    price: 24.99,
     market: 26.99,
     stock: 12,
     description: "Triple Whammy Tin pack — three sealed tins featuring Darkrai V, Slaking V, and Tyranitar V foil promo cards. A Walgreens & CVS exclusive release.",
