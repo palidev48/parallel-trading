@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PARALLEL — Bag</title>
+<link rel="stylesheet" href="/css/parallel.css">
+<style>
+  .cart-wrap{max-width:1000px;margin:0 auto;padding:80px 40px}
+  .cart-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:24px;border-bottom:1px solid #1f1f1f;margin-bottom:32px}
+  .cart-head h1{font-family:var(--serif);font-size:42px;font-weight:400}
+  .cart-head .count{font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:var(--text-3)}
+  .cart-item{display:grid;grid-template-columns:120px 1fr auto auto auto;gap:24px;align-items:center;padding:24px 0;border-bottom:1px solid #1a1a1a}
+  .cart-thumb{width:120px;height:120px;background:radial-gradient(ellipse at center,#1a1a1a 0%,#0a0a0a 100%);display:flex;align-items:center;justify-content:center;padding:12px;border:1px solid #1a1a1a}
+  .cart-thumb img{max-width:100%;max-height:100%;object-fit:contain}
+  .cart-detail h3{font-family:var(--serif);font-size:18px;font-weight:400;line-height:1.3;margin-bottom:4px}
+  .cart-detail .tag{font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--text-3)}
+  .cart-detail a{color:inherit;text-decoration:none}
+  .cart-detail a:hover h3{color:var(--gold)}
+  .cart-qty{display:inline-flex;align-items:center;border:1px solid #2a2a2a}
+  .cart-qty button{background:transparent;border:none;color:#fff;width:32px;height:32px;cursor:pointer;font-size:14px}
+  .cart-qty button:hover{background:#1a1a1a}
+  .cart-qty input{background:transparent;border:none;color:#fff;width:40px;height:32px;text-align:center;font-size:13px;font-family:var(--sans)}
+  .cart-price{font-family:var(--sans);font-size:16px;font-weight:600;min-width:90px;text-align:right}
+  .cart-remove{background:transparent;border:none;color:var(--text-3);cursor:pointer;font-size:18px;padding:8px;line-height:1}
+  .cart-remove:hover{color:var(--pk-red)}
+  .cart-summary{margin-top:32px;padding-top:24px;border-top:1px solid #1f1f1f;display:flex;justify-content:flex-end}
+  .cart-summary-box{min-width:320px}
+  .cart-row{display:flex;justify-content:space-between;padding:8px 0;font-size:14px;color:var(--text-2)}
+  .cart-row.total{padding-top:16px;margin-top:8px;border-top:1px solid #2a2a2a;font-size:18px;color:var(--text);font-weight:600}
+  .cart-checkout{display:block;width:100%;margin-top:24px;background:var(--text);color:var(--bg);border:none;padding:18px 24px;font-family:var(--sans);font-size:13px;letter-spacing:0.32em;text-transform:uppercase;cursor:pointer;font-weight:600;text-align:center;text-decoration:none}
+  .cart-checkout:hover{opacity:0.85}
+  .cart-empty{text-align:center;padding:80px 0}
+  .cart-empty h2{font-family:var(--serif);font-size:32px;font-weight:400;margin-bottom:16px}
+  .cart-empty p{color:var(--text-2);margin-bottom:32px}
+  .cart-empty a{display:inline-block;padding:14px 32px;border:1px solid var(--text);color:var(--text);text-decoration:none;font-size:11px;letter-spacing:0.32em;text-transform:uppercase}
+  .cart-empty a:hover{background:var(--text);color:var(--bg)}
+  @media (max-width:700px){
+    .cart-item{grid-template-columns:80px 1fr;gap:16px}
+    .cart-thumb{width:80px;height:80px}
+    .cart-qty,.cart-price,.cart-remove{grid-column:2}
+  }
+</style>
+</head>
+<body>
+<div class="frame-top"></div><div class="frame-right"></div><div class="frame-bottom"></div><div class="frame-left"></div>
+
+<nav class="nav"><div class="nav-inner">
+  <a href="/" class="brand"><span class="brand-rule"></span><span class="label">PARALLEL<span class="dot">.</span></span><span class="brand-rule"></span></a>
+  <div class="nav-links">
+    <a href="/">Drops</a>
+    <a href="/marketplace.html">Marketplace</a>
+    <a href="/sell.html">Sell</a>
+    <a href="/cart.html" style="position:relative">Bag <span data-cart-badge style="display:none;background:var(--pk-red);color:#fff;font-size:10px;padding:2px 6px;border-radius:10px;margin-left:4px"></span></a>
+    <a href="/account.html" id="nav-account" style="display:none">Account</a>
+    <a href="/login.html" class="nav-cta" id="nav-login">Sign In</a>
+  </div>
+</div></nav>
+
+<main class="cart-wrap" id="cart-root"></main>
+
+<script src="/js/products.js"></script>
+<script src="/js/cart.js"></script>
+<script>
+(function(){
+  const root = document.getElementById('cart-root');
+
+  function render(){
+    const items = window.PARALLEL_CART.read();
+    const products = window.PARALLEL_PRODUCTS;
+
+    if (!items.length){
+      root.innerHTML = [
+        '<div class="cart-empty">',
+        '  <h2>Your bag is empty</h2>',
+        '  <p>Add something from the Drop Collection to get started.</p>',
+        '  <a href="/">Browse Drops</a>',
+        '</div>'
+      ].join('');
+      return;
+    }
+
+    const subtotal = window.PARALLEL_CART.subtotal();
+    const shipping = subtotal >= 75 ? 0 : 6.99;
+    const total = subtotal + shipping;
+    const itemCount = items.reduce(function(n,i){return n+i.qty;}, 0);
+
+    const itemsHtml = items.map(function(i){
+      const p = products[i.pid];
+      if (!p) return '';
+      const lineTotal = (p.price * i.qty).toFixed(2);
+      return [
+        '<div class="cart-item" data-pid="' + p.id + '">',
+        '  <div class="cart-thumb"><img src="' + p.image + '" alt="' + p.title + '"></div>',
+        '  <div class="cart-detail">',
+        '    <a href="/product.html?id=' + p.id + '"><h3>' + p.title + '</h3></a>',
+        '    <div class="tag">' + p.tag + '</div>',
+        '  </div>',
+        '  <div class="cart-qty">',
+        '    <button type="button" data-act="minus">−</button>',
+        '    <input type="number" value="' + i.qty + '" min="1" max="' + p.stock + '" data-qty-input>',
+        '    <button type="button" data-act="plus">+</button>',
+        '  </div>',
+        '  <div class="cart-price">$' + lineTotal + '</div>',
+        '  <button class="cart-remove" data-act="remove" aria-label="Remove">×</button>',
+        '</div>'
+      ].join('');
+    }).join('');
+
+    root.innerHTML = [
+      '<div class="cart-head"><h1>Your Bag</h1><span class="count">' + itemCount + ' item' + (itemCount===1?'':'s') + '</span></div>',
+      itemsHtml,
+      '<div class="cart-summary"><div class="cart-summary-box">',
+      '  <div class="cart-row"><span>Subtotal</span><span>$' + subtotal.toFixed(2) + '</span></div>',
+      '  <div class="cart-row"><span>Shipping' + (shipping===0?' (free over $75)':'') + '</span><span>' + (shipping===0?'FREE':'$'+shipping.toFixed(2)) + '</span></div>',
+      '  <div class="cart-row total"><span>Total</span><span>$' + total.toFixed(2) + '</span></div>',
+      '  <button class="cart-checkout" id="checkout-btn">Checkout</button>',
+      '</div></div>'
+    ].join('');
+
+    root.querySelectorAll('.cart-item').forEach(function(row){
+      const pid = row.dataset.pid;
+      const input = row.querySelector('[data-qty-input]');
+      row.querySelector('[data-act="minus"]').addEventListener('click', function(){
+        window.PARALLEL_CART.setQty(pid, parseInt(input.value,10)-1);
+      });
+      row.querySelector('[data-act="plus"]').addEventListener('click', function(){
+        window.PARALLEL_CART.setQty(pid, parseInt(input.value,10)+1);
+      });
+      input.addEventListener('change', function(){
+        window.PARALLEL_CART.setQty(pid, parseInt(input.value,10) || 1);
+      });
+      row.querySelector('[data-act="remove"]').addEventListener('click', function(){
+        window.PARALLEL_CART.remove(pid);
+      });
+    });
+    const co = document.getElementById('checkout-btn');
+    if (co) co.addEventListener('click', function(){
+      alert('Checkout flow coming soon — this is a demo store.');
+    });
+  }
+
+  document.addEventListener('cart:change', render);
+  render();
+})();
+</script>
+</body>
+</html>
