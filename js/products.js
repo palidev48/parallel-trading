@@ -1,14 +1,14 @@
-undefined// PARALLEL Product Catalog
+// PARALLEL Product Catalog
 window.PARALLEL_PRODUCTS = {
   "triple-whammy-tin": {
     id: "triple-whammy-tin",
     title: "Pokémon TCG: Triple Whammy Tin",
     tag: "Walgreens / CVS Exclusive",
-    image: "/images/triple-whammy-tin.jpg",
+    image: "/images/triple-whammy-tin.jpg?v=3",
     price: 24.99,
     market: 26.99,
     stock: 12,
-    description: "Triple Whammy Tin pack — three sealed tins featuring Darkrai V, Slaking V, and Tyranitar V foil promo cards. A Walgreens & CVS exclusive release.",
+    description: "Triple Whammy Tin pack â three sealed tins featuring Darkrai V, Slaking V, and Tyranitar V foil promo cards. A Walgreens & CVS exclusive release.",
     contents: [
       "3 sealed Pokémon TCG tins",
       "Darkrai V, Slaking V, and Tyranitar V foil promo cards",
@@ -21,24 +21,24 @@ window.PARALLEL_PRODUCTS = {
     id: "prismatic-surprise-box",
     title: "Pokémon TCG: Prismatic Evolutions Surprise Box",
     tag: "Sealed Mystery Box",
-    image: "/images/prismatic-surprise-box.jpg",
+    image: "/images/prismatic-surprise-box.jpg?v=3",
     price: 70.99,
     market: 83.99,
     stock: 6,
-    description: "The Prismatic Evolutions Surprise Box — a sealed mystery box from the wildly popular Scarlet & Violet Prismatic Evolutions set. Contains Eevee-themed sealed product and exclusive promos.",
+    description: "The Prismatic Evolutions Surprise Box â a sealed mystery box from the wildly popular Scarlet & Violet Prismatic Evolutions set. Contains Eevee-themed sealed product and exclusive promos.",
     contents: [
       "Sealed Prismatic Evolutions booster packs",
       "Exclusive Eevee-themed promo card",
       "Collector's coin",
-      "Surprise contents — factory sealed"
+      "Surprise contents â factory sealed"
     ],
     sku: "PKM-PSB-002"
   },
   "perfect-order-pc-etb": {
     id: "perfect-order-pc-etb",
-    title: "Pokémon TCG: Mega Evolution — Perfect Order PC Elite Trainer Box",
+    title: "Pokémon TCG: Mega Evolution â Perfect Order PC Elite Trainer Box",
     tag: "Pokémon Center Exclusive",
-    image: "/images/perfect-order-pc-etb.jpg",
+    image: "/images/perfect-order-pc-etb.jpg?v=3",
     price: 85.99,
     market: 102.99,
     stock: 4,
@@ -54,9 +54,9 @@ window.PARALLEL_PRODUCTS = {
   },
   "chaos-rising-etb": {
     id: "chaos-rising-etb",
-    title: "Pokémon TCG: Scarlet & Violet — Chaos Rising Elite Trainer Box",
+    title: "Pokémon TCG: Scarlet & Violet â Chaos Rising Elite Trainer Box",
     tag: "Elite Trainer Box",
-    image: "/images/chaos-rising-etb.jpg",
+    image: "/images/chaos-rising-etb.jpg?v=3",
     price: 85.99,
     market: 102.99,
     stock: 8,
@@ -74,7 +74,7 @@ window.PARALLEL_PRODUCTS = {
     id: "mega-zygarde-premium",
     title: "Pokémon TCG: Mega Zygarde ex Premium Collection",
     tag: "Premium Collection",
-    image: "/images/mega-zygarde-premium.jpg",
+    image: "/images/mega-zygarde-premium.jpg?v=3",
     price: 64.99,
     market: 79.99,
     stock: 5,
@@ -89,13 +89,13 @@ window.PARALLEL_PRODUCTS = {
   },
   "moonlit-tin-mega-gengar": {
     id: "moonlit-tin-mega-gengar",
-    title: "Pokémon TCG: Moonlit Tin — Mega Gengar",
+    title: "Pokémon TCG: Moonlit Tin â Mega Gengar",
     tag: "Tin",
-    image: "/images/moonlit-tin-mega-gengar.jpg",
+    image: "/images/moonlit-tin-mega-gengar.jpg?v=3",
     price: 24.99,
     market: 29.99,
     stock: 10,
-    description: "Moonlit Tin featuring Mega Gengar as the foil promo. Part of the Moonlit Tin series — a haunting purple, yellow, and black die-cut tin with a holographic Mega Gengar.",
+    description: "Moonlit Tin featuring Mega Gengar as the foil promo. Part of the Moonlit Tin series â a haunting purple, yellow, and black die-cut tin with a holographic Mega Gengar.",
     contents: [
       "1 sealed Moonlit Tin",
       "Mega Gengar foil promo card",
@@ -107,11 +107,11 @@ window.PARALLEL_PRODUCTS = {
     id: "hops-zacian-ex-box",
     title: "Pokémon TCG: Hop's Zacian ex Box",
     tag: "Box Collection",
-    image: "/images/hops-zacian-ex-box.jpg",
+    image: "/images/hops-zacian-ex-box.jpg?v=3",
     price: 21.99,
     market: 25.99,
     stock: 14,
-    description: "Hop's Zacian ex Box — featuring Hop's signature Zacian ex from the Journey Together expansion. Includes the playable Zacian ex card and a jumbo oversize version.",
+    description: "Hop's Zacian ex Box â featuring Hop's signature Zacian ex from the Journey Together expansion. Includes the playable Zacian ex card and a jumbo oversize version.",
     contents: [
       "1 Hop's Zacian ex foil card",
       "1 oversized Hop's Zacian ex card",
@@ -123,14 +123,14 @@ window.PARALLEL_PRODUCTS = {
     id: "chaos-rising-booster-bundle",
     title: "Pokémon TCG: Chaos Rising Booster Bundle",
     tag: "Booster Bundle",
-    image: "/images/chaos-rising-booster-bundle.jpg",
+    image: "/images/chaos-rising-booster-bundle.jpg?v=3",
     price: 26.99,
     market: 32.99,
     stock: 20,
-    description: "Booster Bundle for the Mega Evolution: Chaos Rising set. Six sealed booster packs — the most efficient way to chase the set's chase cards including Mega Charizard and Mega Lucario.",
+    description: "Booster Bundle for the Mega Evolution: Chaos Rising set. Six sealed booster packs â the most efficient way to chase the set's chase cards including Mega Charizard and Mega Lucario.",
     contents: [
       "6 Chaos Rising booster packs",
-      "Factory sealed — retailer fresh"
+      "Factory sealed â retailer fresh"
     ],
     sku: "PKM-CRB-008"
   },
@@ -138,11 +138,11 @@ window.PARALLEL_PRODUCTS = {
     id: "chaos-rising-blister",
     title: "Pokémon TCG: Chaos Rising 3-Booster Blister",
     tag: "3-Pack Blister",
-    image: "/images/chaos-rising-blister.jpg",
+    image: "/images/chaos-rising-blister.jpg?v=3",
     price: 14.99,
     market: 17.99,
     stock: 24,
-    description: "Three-pack blister from Mega Evolution: Chaos Rising. Includes a Charmeleon foil promo card on the front of the pack — perfect for casual collectors and gifts.",
+    description: "Three-pack blister from Mega Evolution: Chaos Rising. Includes a Charmeleon foil promo card on the front of the pack â perfect for casual collectors and gifts.",
     contents: [
       "3 Chaos Rising booster packs",
       "1 Charmeleon foil promo card",
