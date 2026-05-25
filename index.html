@@ -53,30 +53,38 @@
 @media(max-width:780px){.poke-hero,.poke-hero-mid-l,.poke-hero-mid-r{display:none}}
 @media(prefers-reduced-motion:reduce){.poke-hero,.poke-hero-mid-l,.poke-hero-mid-r{animation:none!important;opacity:.85!important}}
 
-.ebay-card{position:fixed;bottom:24px;left:24px;width:280px;background:#0a0a0a;border:1px solid var(--border);border-radius:4px;padding:14px 14px 12px;z-index:50;box-shadow:0 12px 36px rgba(0,0,0,0.6),0 0 0 1px rgba(211,47,47,0.08);font-family:var(--sans);transition:transform .25s ease,opacity .25s ease;backdrop-filter:blur(6px);background:rgba(10,10,10,0.92)}
-.ebay-card.ebay-hidden{transform:translateY(140%);opacity:0;pointer-events:none}
-.ebay-card .ec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border-2)}
-.ebay-card .ec-eyebrow{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--pk-red);font-weight:700;display:flex;align-items:center;gap:6px}
-.ebay-card .ec-eyebrow .ec-pulse{width:6px;height:6px;border-radius:50%;background:var(--pk-red);box-shadow:0 0 0 0 rgba(211,47,47,0.7);animation:ec-pulse 1.8s infinite}
-@keyframes ec-pulse{0%{box-shadow:0 0 0 0 rgba(211,47,47,0.6)}70%{box-shadow:0 0 0 8px rgba(211,47,47,0)}100%{box-shadow:0 0 0 0 rgba(211,47,47,0)}}
-.ebay-card .ec-title{font-size:13px;font-weight:700;color:var(--text);letter-spacing:-0.005em;margin-top:2px}
-.ebay-card .ec-close{background:none;border:none;color:var(--text-2);font-size:18px;line-height:1;cursor:pointer;padding:0 4px;font-family:inherit}
-.ebay-card .ec-close:hover{color:var(--text)}
-.ebay-card .ec-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:8px 0;opacity:0;animation:ec-fade-in .4s ease-out forwards;border-bottom:1px dashed rgba(255,255,255,0.04)}
-.ebay-card .ec-row:last-of-type{border-bottom:none}
-@keyframes ec-fade-in{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
-.ebay-card .ec-item{flex:1;min-width:0}
-.ebay-card .ec-name{font-size:11.5px;font-weight:600;color:var(--text);line-height:1.3;letter-spacing:-0.005em;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
-.ebay-card .ec-date{font-size:9px;color:var(--text-2);margin-top:2px;letter-spacing:.05em;text-transform:uppercase;font-weight:500}
-.ebay-card .ec-price{font-size:14px;font-weight:800;color:var(--pk-red);white-space:nowrap;letter-spacing:-0.01em}
-.ebay-card .ec-foot{margin-top:8px;padding-top:8px;border-top:1px solid var(--border-2);display:flex;align-items:center;justify-content:space-between;font-size:9px;color:var(--text-2);letter-spacing:.1em;text-transform:uppercase}
-.ebay-card .ec-foot a{color:var(--text-2);text-decoration:none}
-.ebay-card .ec-foot a:hover{color:var(--text)}
-.ebay-reopen{position:fixed;bottom:24px;left:24px;width:auto;padding:8px 12px;background:#0a0a0a;border:1px solid var(--border);border-radius:20px;color:var(--text-2);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;font-family:var(--sans);cursor:pointer;z-index:49;display:none;align-items:center;gap:6px}
+.ebay-card{position:fixed;bottom:24px;left:24px;width:320px;background:#fff;border:1px solid #d1d5db;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.08);z-index:50;font:13px/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#111;overflow:hidden;animation:ec-slide-in .6s cubic-bezier(.16,1,.3,1) both}
+.ebay-card.ebay-hidden{display:none}
+@keyframes ec-slide-in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.ec-head{padding:10px 12px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.ec-eyebrow{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.04em}
+.ec-ebay-logo{height:18px;display:block}
+.ec-pulse{display:inline-block;width:7px;height:7px;border-radius:50%;background:#E53238;box-shadow:0 0 0 0 rgba(229,50,56,.7);animation:ec-pulse 1.6s infinite}
+@keyframes ec-pulse{0%{box-shadow:0 0 0 0 rgba(229,50,56,.6)}70%{box-shadow:0 0 0 8px rgba(229,50,56,0)}100%{box-shadow:0 0 0 0 rgba(229,50,56,0)}}
+.ec-title{font-size:12px;color:#6b7280;margin-top:2px}
+.ec-close{background:transparent;border:0;color:#9ca3af;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;line-height:1}
+.ec-close:hover{background:#f3f4f6;color:#111}
+.ec-list{max-height:260px;overflow:hidden;position:relative}
+.ec-cols{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-size:10px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.04em}
+.ec-cols-right{display:flex;gap:14px}
+.ec-cols-right span{min-width:46px;text-align:right}
+.ec-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-bottom:1px solid #f3f4f6;text-decoration:none;color:inherit;transition:background .15s;gap:8px}
+.ec-row:last-child{border-bottom:0}
+.ec-row:hover{background:#f9fafb}
+.ec-item{flex:1;min-width:0}
+.ec-name{font-size:12px;font-weight:600;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ec-date{font-size:10px;color:#9ca3af;margin-top:1px}
+.ec-prices{display:flex;gap:14px;align-items:center;flex-shrink:0}
+.ec-price{font-size:13px;font-weight:700;color:#0064D2;min-width:46px;text-align:right;font-variant-numeric:tabular-nums}
+.ec-high{font-size:13px;font-weight:700;color:#86B817;min-width:46px;text-align:right;font-variant-numeric:tabular-nums}
+.ec-foot{padding:8px 12px;background:#f9fafb;font-size:10px;color:#6b7280;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #e5e7eb}
+.ec-foot a{color:#0064D2;text-decoration:none;font-weight:600}
+.ec-foot a:hover{text-decoration:underline}
+.ebay-reopen{position:fixed;bottom:24px;left:24px;background:#fff;border:1px solid #d1d5db;border-radius:999px;padding:8px 14px;font-size:12px;font-weight:600;color:#111;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12);display:none;align-items:center;gap:8px;z-index:50;font-family:inherit}
 .ebay-reopen.show{display:inline-flex}
-.ebay-reopen .ec-pulse{width:5px;height:5px;border-radius:50%;background:var(--pk-red);animation:ec-pulse 1.8s infinite}
-@media(max-width:780px){.ebay-card,.ebay-reopen{display:none!important}}
-</style>
+.ebay-reopen .ec-pulse{margin:0}
+@media (max-width:780px){.ebay-card,.ebay-reopen{display:none!important}}
+@media (prefers-reduced-motion:reduce){.ec-pulse{animation:none}.ebay-card{animation:none}}</style>
 </head>
 <body>
 <div class="frame-top"></div><div class="frame-right"></div><div class="frame-bottom"></div><div class="frame-left"></div>
@@ -322,48 +330,41 @@ if(window.PARALLEL_PRODUCTS){var __p=window.PARALLEL_PRODUCTS;var __tN=0,__tM=0;
 <aside class="ebay-card" id="ebayCard" aria-label="Recent eBay sold listings">
   <div class="ec-head">
     <div>
-      <div class="ec-eyebrow"><span class="ec-pulse"></span>What People Paid on eBay</div>
-      <div class="ec-title">Recent sold listings</div>
+      <div class="ec-eyebrow"><span class="ec-pulse"></span><svg class="ec-ebay-logo" viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" aria-label="eBay"><g><path fill="#E53238" d="M129 200c0-43-30-67-73-67-44 0-72 24-72 67 0 43 28 67 72 67 27 0 47-9 60-25l-20-14c-9 10-23 16-40 16-23 0-39-13-40-30h120v-14zm-113-13c2-14 16-27 39-27 23 0 38 12 40 27H16z"/><path fill="#0064D2" d="M275 200c0-43-29-67-72-67-21 0-39 7-50 21v-66h-25v172h25v-15c12 12 28 22 50 22 43 0 72-24 72-67zm-26 0c0 28-19 45-46 45s-46-17-46-45 19-45 46-45 46 17 46 45z"/><path fill="#F5AF02" d="M444 267v-66c0-44-30-68-71-68-23 0-43 7-55 18l11 17c10-9 25-15 43-15 26 0 47 14 47 47v3c-12-9-27-13-46-13-38 0-69 18-69 49 0 31 31 49 65 49 24 0 44-9 51-22v17h24zm-25-45c0 18-21 30-46 30-22 0-39-10-39-26 0-17 21-27 43-27 19 0 32 4 42 11v12z"/><path fill="#86B817" d="M662 134h-29l-65 105-66-105h-30l86 134-37 64h28l113-198z"/></g></svg><span>sold</span></div>
+      <div class="ec-title">What people paid recently</div>
     </div>
     <button class="ec-close" id="ebayCardClose" aria-label="Close">&times;</button>
   </div>
-  <div class="ec-list" id="ebayCardList"></div>
+  <div class="ec-cols">
+    <span>Item</span>
+    <span class="ec-cols-right"><span>Recent</span><span>High</span></span>
+  </div>
+  <div class="ec-list" id="ebayList"></div>
   <div class="ec-foot">
-    <span>Source: eBay sold</span>
+    <span>Updated May 25</span>
     <a href="https://www.ebay.com/sch/i.html?_nkw=pokemon+sealed&LH_Sold=1&LH_Complete=1" target="_blank" rel="noopener">View on eBay &rarr;</a>
   </div>
 </aside>
-<button class="ebay-reopen" id="ebayReopen" aria-label="Show recent eBay sold listings"><span class="ec-pulse"></span>eBay sold</button>
+<button class="ebay-reopen" id="ebayReopen"><span class="ec-pulse"></span>eBay sold</button>
 <script>
 (function(){
-  var comps = [
-    {name:"Perfect Order PC ETB", price:"$122.00", date:"May 23", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+mega+evolution+perfect+order+pokemon+center+elite+trainer+box&LH_Sold=1&LH_Complete=1"},
-    {name:"Prismatic Surprise Box", price:"$74.95", date:"May 24", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+prismatic+evolutions+surprise+box&LH_Sold=1&LH_Complete=1"},
-    {name:"Chaos Rising ETB", price:"$90.00", date:"May 25", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+chaos+rising+elite+trainer+box&LH_Sold=1&LH_Complete=1"},
-    {name:"Moonlit Tin - Mega Gengar", price:"$49.99", date:"May 24", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+moonlit+tin+mega+gengar&LH_Sold=1&LH_Complete=1"},
-    {name:"Triple Whammy Tin", price:"$29.86", date:"May 25", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+triple+whammy+tin&LH_Sold=1&LH_Complete=1"},
-    {name:"Hop's Zacian ex Box", price:"$44.26", date:"May 25", url:"https://www.ebay.com/sch/i.html?_nkw=pokemon+hops+zacian+ex+box&LH_Sold=1&LH_Complete=1"}
-  ];
-  var SHOW = 3;
-  var idx = 0;
-  var list = document.getElementById('ebayCardList');
-  var card = document.getElementById('ebayCard');
-  var reopen = document.getElementById('ebayReopen');
+  var comps = [{"name":"Perfect Order PC ETB","price":"$122.00","high":"$125.00","date":"May 23","q":"pokemon perfect order pokemon center elite trainer box"},{"name":"Prismatic Surprise Box","price":"$74.95","high":"$100.00","date":"May 24","q":"prismatic evolutions surprise box sealed"},{"name":"Chaos Rising ETB","price":"$90.00","high":"$99.99","date":"May 25","q":"pokemon chaos rising elite trainer box sealed"},{"name":"Moonlit Tin Mega Gengar","price":"$49.99","high":"$65.10","date":"May 24","q":"pokemon mega moonlit tin mega gengar"},{"name":"Triple Whammy Tin","price":"$29.86","high":"$39.99","date":"May 25","q":"pokemon triple whammy tin"},{"name":"Hop's Zacian ex Box","price":"$44.26","high":"$52.99","date":"May 25","q":"pokemon hop's zacian ex box"}];
+  var list = document.getElementById('ebayList');
   if (!list) return;
   function render(){
-    var html = '';
-    for (var i = 0; i < SHOW; i++) {
-      var c = comps[(idx + i) % comps.length];
-      html += '<a class="ec-row" href="' + c.url + '" target="_blank" rel="noopener" style="text-decoration:none;animation-delay:' + (i*0.08) + 's">'
+    list.innerHTML = comps.map(function(c){
+      var url = 'https://www.ebay.com/sch/i.html?_nkw=' + encodeURIComponent(c.q) + '&LH_Sold=1&LH_Complete=1';
+      return '<a class="ec-row" href="' + url + '" target="_blank" rel="noopener">'
         + '<div class="ec-item"><div class="ec-name">' + c.name + '</div><div class="ec-date">Sold ' + c.date + '</div></div>'
-        + '<div class="ec-price">' + c.price + '</div></a>';
-    }
-    list.innerHTML = html;
-    idx = (idx + SHOW) % comps.length;
+        + '<div class="ec-prices"><div class="ec-price">' + c.price + '</div><div class="ec-high">' + c.high + '</div></div>'
+      + '</a>';
+    }).join('');
   }
   render();
-  var rotateTimer = setInterval(render, 5000);
-  document.getElementById('ebayCardClose').addEventListener('click', function(){
+  var card = document.getElementById('ebayCard');
+  var closeBtn = document.getElementById('ebayCardClose');
+  var reopen = document.getElementById('ebayReopen');
+  closeBtn.addEventListener('click', function(){
     card.classList.add('ebay-hidden');
     reopen.classList.add('show');
     try { sessionStorage.setItem('ebayCardClosed', '1'); } catch(e){}
