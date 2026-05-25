@@ -13,8 +13,27 @@
 <title>PARALLEL - Sealed Pokémon TCG, Below Market</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/parallel.css">
+<style>
+  .hero-bold{padding:120px 32px 96px;text-align:center;border-bottom:1px solid var(--border);background:#000}
+  .hero-bold .badge{display:inline-block;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--pk-gold);margin-bottom:36px;padding:10px 18px;border:1px solid var(--gold-dim);border-radius:2px}
+  .hero-bold h1{font-family:var(--sans);font-weight:800;font-size:clamp(56px,9vw,108px);line-height:1.02;letter-spacing:-0.035em;margin-bottom:28px;color:var(--text)}
+  .hero-bold h1 .red{color:var(--pk-red)}
+  .hero-bold .lede{max-width:580px;margin:0 auto;color:var(--text-2);font-size:17px;line-height:1.65}
+  .trust-pills{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:40px}
+  .trust-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;border:1px solid var(--border-2);border-radius:2px;color:var(--text-2);background:#0a0a0a}
+  .trust-pill .mark{width:6px;height:6px;border-radius:50%;display:inline-block}
+  .trust-pill.red .mark{background:var(--pk-red)}
+  .trust-pill.blue .mark{background:#3b82f6}
+  .trust-pill.gold .mark{background:var(--pk-gold)}
+  .eyebrow-red{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--pk-red);margin-bottom:14px}
+  .h-bold{font-family:var(--sans);font-weight:800;font-size:clamp(32px,5vw,56px);letter-spacing:-0.03em;color:var(--text)}
+  .num-bold{font-family:var(--sans);font-weight:800;font-size:56px;color:var(--pk-red);line-height:1;margin-bottom:16px;letter-spacing:-0.02em}
+  .cta-band-bold{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 32px;text-align:center}
+  .btn-red{background:var(--pk-red);border:1px solid var(--pk-red);color:#fff;padding:14px 36px;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:700;display:inline-flex;align-items:center;width:auto;border-radius:2px;font-family:inherit;cursor:pointer;transition:all .15s}
+  .btn-red:hover{background:#ef4444;border-color:#ef4444}
+</style>
 </head>
 <body>
 <nav class="nav"><div class="nav-inner">
@@ -28,16 +47,21 @@
     </div>
   </div></nav>
 
-<section class="hero">
+<section class="hero-bold">
   <span class="badge">Drop 001 · Live Now</span>
-  <h1>Sealed. Sourced.<br><em>Verified.</em></h1>
-  <p class="lede">Authentic, factory-sealed Pokémon TCG product, priced below market. Every order ships with the original receipt. No grey market. No guesswork.</p>
+  <h1>Sealed. Verified.<br><span class="red">Below market.</span></h1>
+  <p class="lede">Authentic, factory-sealed Pokémon TCG product. Sourced directly from authorized retailers. Proof of purchase on every order.</p>
+  <div class="trust-pills">
+    <span class="trust-pill red"><span class="mark"></span>100% Sealed</span>
+    <span class="trust-pill blue"><span class="mark"></span>Below Market</span>
+    <span class="trust-pill gold"><span class="mark"></span>Receipt Included</span>
+  </div>
 </section>
 
 <section class="section">
   <div class="section-head">
-    <div class="eyebrow">Drop 001</div>
-    <h2>The Collection</h2>
+    <div class="eyebrow-red">In Stock</div>
+    <h2 class="h-bold">Drop Collection</h2>
   </div>
   <div class="grid">
         <article class="card">
@@ -46,10 +70,10 @@
             <div class="pname">Walgreens / CVS Exclusive</div>
           </div>
           <div class="card-body">
-            <h3 class="card-title">Pokémon TCG: Triple Whammy Tin</h3>
+            <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Triple Whammy Tin</h3>
             <div class="card-tag">Walgreens / CVS Exclusive</div>
             <div class="card-price">
-              <span class="now">$22.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$22.99</span>
               <span class="market">Market $26.99</span>
             </div>
             <button class="btn" data-pid="triple-whammy-tin">Add to Bag</button>
@@ -61,10 +85,10 @@
             <div class="pname">Sealed Mystery Box</div>
           </div>
           <div class="card-body">
-            <h3 class="card-title">Pokémon TCG: Prismatic Evolutions Surprise Box</h3>
+            <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Prismatic Evolutions Surprise Box</h3>
             <div class="card-tag">Sealed Mystery Box</div>
             <div class="card-price">
-              <span class="now">$70.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$70.99</span>
               <span class="market">Market $83.99</span>
             </div>
             <button class="btn" data-pid="prismatic-surprise-box">Add to Bag</button>
@@ -76,10 +100,10 @@
             <div class="pname">Pokémon Center Exclusive</div>
           </div>
           <div class="card-body">
-            <h3 class="card-title">Pokémon TCG: Mega Evolution — Perfect Order PC Elite Trainer Box</h3>
+            <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Mega Evolution — Perfect Order PC Elite Trainer Box</h3>
             <div class="card-tag">Pokémon Center Exclusive</div>
             <div class="card-price">
-              <span class="now">$85.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$85.99</span>
               <span class="market">Market $102.99</span>
             </div>
             <button class="btn" data-pid="perfect-order-pc-etb">Add to Bag</button>
@@ -91,10 +115,10 @@
             <div class="pname">Elite Trainer Box</div>
           </div>
           <div class="card-body">
-            <h3 class="card-title">Pokémon TCG: Scarlet & Violet — Chaos Rising Elite Trainer Box</h3>
+            <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Scarlet & Violet — Chaos Rising Elite Trainer Box</h3>
             <div class="card-tag">Elite Trainer Box</div>
             <div class="card-price">
-              <span class="now">$85.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$85.99</span>
               <span class="market">Market $102.99</span>
             </div>
             <button class="btn" data-pid="chaos-rising-etb">Add to Bag</button>
@@ -106,10 +130,10 @@
             <div class="pname">Premium Collection</div>
           </div>
           <div class="card-body">
-            <h3 class="card-title">Pokémon TCG: Mega Zygarde ex Premium Collection</h3>
+            <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Mega Zygarde ex Premium Collection</h3>
             <div class="card-tag">Premium Collection</div>
             <div class="card-price">
-              <span class="now">$64.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$64.99</span>
               <span class="market">Market $76.99</span>
             </div>
             <button class="btn" data-pid="mega-zygarde-premium">Add to Bag</button>
@@ -121,10 +145,10 @@
             <div class="pname">Tin</div>
           </div>
           <div class="card-body">
-            <h3 class="card-title">Pokémon TCG: Moonlit Tin — Mega Gengar</h3>
+            <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Moonlit Tin — Mega Gengar</h3>
             <div class="card-tag">Tin</div>
             <div class="card-price">
-              <span class="now">$43.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$43.99</span>
               <span class="market">Market $51.99</span>
             </div>
             <button class="btn" data-pid="moonlit-tin-mega-gengar">Add to Bag</button>
@@ -136,10 +160,10 @@
             <div class="pname">Box Collection</div>
           </div>
           <div class="card-body">
-            <h3 class="card-title">Pokémon TCG: Hop’s Zacian ex Box</h3>
+            <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Hop’s Zacian ex Box</h3>
             <div class="card-tag">Box Collection</div>
             <div class="card-price">
-              <span class="now">$43.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$43.99</span>
               <span class="market">Market $51.99</span>
             </div>
             <button class="btn" data-pid="hops-zacian-ex-box">Add to Bag</button>
@@ -151,10 +175,10 @@
             <div class="pname">Booster Bundle</div>
           </div>
           <div class="card-body">
-            <h3 class="card-title">Pokémon TCG: Chaos Rising Booster Bundle</h3>
+            <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Chaos Rising Booster Bundle</h3>
             <div class="card-tag">Booster Bundle</div>
             <div class="card-price">
-              <span class="now">$42.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$42.99</span>
               <span class="market">Market $51.99</span>
             </div>
             <button class="btn" data-pid="chaos-rising-booster-bundle">Add to Bag</button>
@@ -166,10 +190,10 @@
             <div class="pname">3-Pack Blister</div>
           </div>
           <div class="card-body">
-            <h3 class="card-title">Pokémon TCG: Chaos Rising 3-Pack Blister</h3>
+            <h3 class="card-title" style="font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.005em;min-height:46px">Pokémon TCG: Chaos Rising 3-Pack Blister</h3>
             <div class="card-tag">3-Pack Blister</div>
             <div class="card-price">
-              <span class="now">$21.99</span>
+              <span class="now" style="font-family:var(--sans);font-weight:700;font-size:24px;letter-spacing:-0.01em">$21.99</span>
               <span class="market">Market $25.99</span>
             </div>
             <button class="btn" data-pid="chaos-rising-blister">Add to Bag</button>
@@ -180,37 +204,37 @@
 
 <section class="standard">
   <div class="section-head">
-    <div class="eyebrow">The PARALLEL Standard</div>
-    <h2>Buyer confidence, first.</h2>
+    <div class="eyebrow-red">The PARALLEL Standard</div>
+    <h2 class="h-bold">Buyer confidence, first.</h2>
   </div>
   <div class="standard-grid">
     <div class="standard-item">
-      <div class="num">01</div>
+      <div class="num-bold">01</div>
       <h3>Sourced From Retail</h3>
       <p>Every unit purchased directly from authorized retailers. Original receipts retained and shipped with order.</p>
     </div>
     <div class="standard-item">
-      <div class="num">02</div>
+      <div class="num-bold">02</div>
       <h3>Factory Sealed Only</h3>
       <p>We do not sell opened, weighed, or resealed product. If it has been touched past the shrink wrap, it does not ship.</p>
     </div>
     <div class="standard-item">
-      <div class="num">03</div>
+      <div class="num-bold">03</div>
       <h3>Below Market</h3>
       <p>Listed below current secondary market. Fair price, verified product, no eBay roulette.</p>
     </div>
   </div>
 </section>
 
-<section class="cta-band">
-  <h2>Sell to PARALLEL.</h2>
-  <p>Got sealed product you want to move? We buy and consign. Submit your item, ship it in, get paid when it sells.</p>
-  <a href="/sell.html" class="btn btn-gold" style="display:inline-flex;width:auto;padding:14px 36px">Start a Submission</a>
+<section class="cta-band-bold">
+  <h2 class="h-bold" style="margin-bottom:18px">Sell to <span style="color:var(--pk-red)">PARALLEL</span>.</h2>
+  <p style="color:var(--text-2);max-width:520px;margin:0 auto 32px;font-size:16px">Got sealed product you want to move? We buy and consign. Submit your item, ship it in, get paid when it sells.</p>
+  <a href="/sell.html" class="btn-red">Start a Submission</a>
 </section>
 
 <footer class="foot"><div class="foot-inner">
     <div>
-      <div class="brand">PARALLEL<span style="color:var(--gold)">.</span></div>
+      <div class="brand">PARALLEL<span style="color:var(--pk-red)">.</span></div>
       <div class="dim" style="margin-top:10px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase">Below market. Verified.</div>
     </div>
     <div class="foot-links">
